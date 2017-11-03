@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Platform, StatusBar } from 'react-native';
-import { TabNavigator } from 'react-navigation';
+import { TabNavigator, StackNavigator } from 'react-navigation';
 import { Constants } from 'expo';
 import Decks from './components/decks';
 import New_Deck from './components/new_deck';
-
+import DeckDetail from './components/deckDetail';
 
 function AppStatusBar ({ backgroundColor, ...props }) {
   return (
@@ -13,6 +13,15 @@ function AppStatusBar ({ backgroundColor, ...props }) {
     </View>
   )
 }
+
+const Stack = StackNavigator({
+  Decks: {
+    screen: Tabs,
+  },
+  DeckDetail: {
+    screen: DeckDetail,
+  }
+})
 
 const Tabs = TabNavigator({
   Decks: {
@@ -26,21 +35,22 @@ const Tabs = TabNavigator({
     navigationOptions: {
       tabBarLabel: 'New Deck',
     }
-  },
-  // {
-  //   tabBarOptions: {
-  //     activeTintColor: Platform.OS === 'ios' ? purple : white,
-  //   }
-  // }
-});
+  }
+},
+// {
+//   tabBarOptions: {
+//     activeTintColor: Platform.OS === 'ios' ? purple : white,
+//   }
+// }
+);
 
 export default class App extends Component {
   render() {
     return (
-      // <View>
-        // <AppStatusBar />
+      <View style={styles.container}>
+        <AppStatusBar />
         <Tabs />
-      // </View>
+      </View>
     );
   }
 }
@@ -49,7 +59,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    // alignItems: 'center',
+    // justifyContent: 'center',
   },
 });
