@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, AsyncStorage,
   Button, Alert, TouchableOpacity, } from 'react-native';
-import { StackNavigator } from 'react-navigation';
 import * as helpers from '../helpers';
 
 

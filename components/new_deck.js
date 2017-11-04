@@ -27,7 +27,7 @@ export default class New_Deck extends Component {
     return (
       <View>
         <Text style={styles.text}>What is the title of your new deck?</Text>
-        <TextInput textAlign="center" onChangeText={deck => this.setState({ deck })} />
+        <TextInput placeholder="Deck Title" textAlign="center" onChangeText={deck => this.setState({ deck })} />
         <Button title='Create New Deck!' onPress={this.submitDeck} />
       </View>
     )

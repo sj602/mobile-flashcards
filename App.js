@@ -14,15 +14,6 @@ function AppStatusBar ({ backgroundColor, ...props }) {
   )
 }
 
-const Stack = StackNavigator({
-  Decks: {
-    screen: Tabs,
-  },
-  DeckDetail: {
-    screen: DeckDetail,
-  }
-})
-
 const Tabs = TabNavigator({
   Decks: {
     screen: Decks,
@@ -44,12 +35,24 @@ const Tabs = TabNavigator({
 // }
 );
 
+const Stacks = StackNavigator({
+  Home: {
+    screen: Tabs
+  },
+  DeckDetail: {
+    screen: DeckDetail,
+    navigationOptions: {
+      headerTitle: 'Deck Detail'
+    }
+  }
+})
+
 export default class App extends Component {
   render() {
     return (
       <View style={styles.container}>
         <AppStatusBar />
-        <Tabs />
+        <Stacks />
       </View>
     );
   }
@@ -59,7 +62,5 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    // alignItems: 'center',
-    // justifyContent: 'center',
   },
 });
