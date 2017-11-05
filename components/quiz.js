@@ -11,11 +11,13 @@ export default class Quiz extends Component {
   }
 
   render() {
+    const { navigate } = this.props.navigation;
+
     return (
       <View>
         <Text>This is quiz</Text>
-        <Button title='Add Card' onPress={this.addCard} />
-        <Button title='Start Quiz' onPress={this.startQuiz} />
+        <Button title='Add Card' onPress={() => navigate(addCard)} />
+        <Button title='Start Quiz' onPress={{() => navigate(startCard)} />
       </View>
     )
   }

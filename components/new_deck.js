@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, TextInput, AsyncStorage,
-   Alert, Button, StyleSheet } from 'react-native';
+   Alert, Button, StyleSheet, TouchableOpacity
+} from 'react-native';
 import * as helpers from '../helpers';
 
 export default class New_Deck extends Component {
@@ -8,6 +9,7 @@ export default class New_Deck extends Component {
     super();
     this.state = {
       deck: '',
+      value: '',
     };
     this.submitDeck = this.submitDeck.bind(this);
   }
@@ -23,23 +25,47 @@ export default class New_Deck extends Component {
       questions: {},
     };
     AsyncStorage.mergeItem(KEY, JSON.stringify(obj));
+
+    this.textInput.clear();
   }
 
   render() {
     return (
-      <View>
-        <Text style={styles.text}>What is the title of your new deck?</Text>
-        <TextInput placeholder="Deck Title" textAlign="center" onChangeText={deck => this.setState({ deck })} />
-        <Button title='Create New Deck!' onPress={this.submitDeck} />
+      <View style={styles.view}>
+        <Text style={styles.textTitle}>What is the title of your new deck?</Text>
+        <TextInput placeholder="Deck Title" ref={ref => this.textInput = ref} textAlign="center" onChangeText={deck => this.setState({ deck })} />
+        <TouchableOpacity style={styles.submit} onPress={this.submitDeck}>
+            <Text style={styles.textSubmit}>Create New Deck!</Text>
+        </TouchableOpacity>
       </View>
     )
   }
 }
 
 const styles = StyleSheet.create({
-  text: {
+  view: {
+    flex: 1,
+    flexDirection: 'column',
+  },
+
+  textTitle: {
     fontSize: 25,
     textAlign: 'center'
+  },
+
+  textSubmit: {
+    fontSize: 15,
+    color: 'white',
+  },
+
+  submit: {
+    flexDirection: 'column',
+    marginTop: 30,
+    width: 200,
+    height: 35,
+    alignItems: 'center',
+    backgroundColor: 'black',
+    borderRadius: 10,
   },
 
 });

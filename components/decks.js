@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, AsyncStorage,
-  Button, Alert, TouchableOpacity, } from 'react-native';
+import {
+  StyleSheet, View, Text, AsyncStorage,
+  Button, Alert, TouchableOpacity, ScrollView
+} from 'react-native';
 import * as helpers from '../helpers';
 import DeckDetail from './deckDetail';
 
@@ -15,12 +17,13 @@ export default class Decks extends Component {
     const KEY = 'KEY';
     AsyncStorage.getItem(KEY).then(result => {
       this.setState({ storageData: result })
-      console.log(result);
     });
+    console.log(this.state.storageData)
   }
 
   showData() {
-    console.log(this.state.storageData)
+    const { storageData } = this.state;
+    console.log(storageData.length)
   }
 
 
@@ -29,13 +32,21 @@ export default class Decks extends Component {
     const { storageData } = this.state;
 
     return (
-      <View>
+      <ScrollView>
+        <Button title="click" onPress={() => this.showData()} />
         <Text>AsyncStorage Data: {this.state.storageData}</Text>
+        { Object.keys(storageData).map((deck) => {
+          return (
+            <TouchableOpacity style={styles.container} onPress={() => navigate(DeckDetail)}>
+              <View style={styles.deck}>
+                <Text key={deck} style={styles.title}>{deck}</Text>
+              </View>
+            </TouchableOpacity>
+          )})
+        }
 
 
-
-        <Button title="Click" onPress={() => Alert.alert('clicked')}/>
-      </View>
+      </ScrollView>
     );
   }
 }
@@ -46,9 +57,19 @@ const styles = StyleSheet.create({
   },
 
   deck: {
-    marginBottom: 30,
-    width: 260,
     alignItems: 'center',
-    backgroundColor: 'yellow'
+    paddingBottom: 70,
+    backgroundColor: '#fff',
+    borderBottomColor: 'black',
+    borderBottomWidth: StyleSheet.hairlineWidth,
+  },
+
+  title: {
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+
+  cards: {
+    fontSize: 15,
   },
 });
