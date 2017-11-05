@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+// import './ReactotronConfig';
 import { StyleSheet, Text, View, Platform, StatusBar } from 'react-native';
 import { TabNavigator, StackNavigator } from 'react-navigation';
 import { Constants } from 'expo';

@@ -4,10 +4,10 @@
 // addCardToDeck: take in two arguments, title and card, and will add the card to the list of questions for the deck with the associated title.
 import { AsyncStorage } from 'react-native';
 
-const STORAGE_KEY = 'STORAGE_KEY';
+export const KEY = 'KEY';
 
 export const getDecks = () => {
-  return AsyncStorage.getItem(STORAGE_KEY).then(data => JSON.parse(data));
+  return AsyncStorage.getItem(KEY);
 };
 
 export const getDeck = (id) => {

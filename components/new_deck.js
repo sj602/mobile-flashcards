@@ -1,26 +1,28 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, AsyncStorage, Alert, Button, StyleSheet } from 'react-native';
-
+import { View, Text, TextInput, AsyncStorage,
+   Alert, Button, StyleSheet } from 'react-native';
+import * as helpers from '../helpers';
 
 export default class New_Deck extends Component {
-  state = {
-    deck: '',
+  constructor(){
+    super();
+    this.state = {
+      deck: '',
+    };
+    this.submitDeck = this.submitDeck.bind(this);
   }
 
   submitDeck(value) {
+    const KEY = 'KEY';
+    let { deck } = this.state;
     // if(AsyncStorage.getItem(value)){
     //   Alert.alert(`Try Again`, `There is already ${value} in your decks`);
     // } else (
-    const STORAGE_KEY = 'STORAGE_KEY';
-      AsyncStorage.mergeItem(STORAGE_KEY, {
-        value: {
-          'questions': {
-
-          }
-        }
-      });
-    // )
-    Alert.alert(this.state.deck)
+    let obj = {};
+    obj[deck] = {
+      questions: {},
+    };
+    AsyncStorage.mergeItem(KEY, JSON.stringify(obj));
   }
 
   render() {

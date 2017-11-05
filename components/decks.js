@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, View, Text, AsyncStorage,
   Button, Alert, TouchableOpacity, } from 'react-native';
 import * as helpers from '../helpers';
+import DeckDetail from './deckDetail';
 
 
 
@@ -11,13 +12,11 @@ export default class Decks extends Component {
   }
 
   componentDidMount() {
-    const STORAGE_KEY = 'STORAGE_KEY';
-    AsyncStorage.setItem(STORAGE_KEY, {});
-    const data = AsyncStorage.getItem(STORAGE_KEY).then(result => {
-      return result.json()
-    })
-    console.log(data)
-    this.setState({storageData: data})
+    const KEY = 'KEY';
+    AsyncStorage.getItem(KEY).then(result => {
+      this.setState({ storageData: result })
+      console.log(result);
+    });
   }
 
   showData() {
@@ -26,24 +25,15 @@ export default class Decks extends Component {
 
 
   render() {
+    const { navigate } = this.props.navigation;
+    const { storageData } = this.state;
+
     return (
       <View>
-        <Text>AsyncStorage Data: </Text>
-        <TouchableOpacity style={styles.container}>
-          <View style={styles.button}>
-          <Text>DECK1</Text>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.container}>
-          <View style={styles.button}>
-          <Text>DECK2</Text>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.container}>
-          <View style={styles.button}>
-          <Text>DECK3</Text>
-          </View>
-        </TouchableOpacity>
+        <Text>AsyncStorage Data: {this.state.storageData}</Text>
+
+
+
         <Button title="Click" onPress={() => Alert.alert('clicked')}/>
       </View>
     );
@@ -55,7 +45,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
 
-  button: {
+  deck: {
     marginBottom: 30,
     width: 260,
     alignItems: 'center',
