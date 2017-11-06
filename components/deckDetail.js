@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import {
+  View, Text, Button, StyleSheet, TouchableOpacity,
+} from 'react-native';
 // import New_Question from './new_question';
 // import Quiz from './quiz';
 

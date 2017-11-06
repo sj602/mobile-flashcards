@@ -5,7 +5,6 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import * as helpers from '../helpers';
-import DeckDetail from './deckDetail';
 import { TabNavigator, StackNavigator } from 'react-navigation';
 
 
