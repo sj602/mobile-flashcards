@@ -6,6 +6,9 @@ import { Constants } from 'expo';
 import Decks from './components/decks';
 import New_Deck from './components/new_deck';
 import DeckDetail from './components/deckDetail';
+import Quiz from './components/quiz';
+import New_Question from './components/new_question';
+
 
 function AppStatusBar ({ backgroundColor, ...props }) {
   return (
@@ -43,8 +46,14 @@ const Stacks = StackNavigator({
   DeckDetail: {
     screen: DeckDetail,
     navigationOptions: {
-      headerTitle: 'Deck Detail'
+      title: 'Deck Detail'
     }
+  },
+  Quiz: {
+    screen: Quiz
+  },
+  New_Question: {
+    screen: New_Question
   }
 })
 

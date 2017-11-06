@@ -7,7 +7,7 @@ import { AsyncStorage } from 'react-native';
 export const KEY = 'KEY';
 
 export const getDecks = () => {
-  return AsyncStorage.getItem(KEY);
+  return AsyncStorage.getItem(KEY)
 };
 
 export const getDeck = (id) => {

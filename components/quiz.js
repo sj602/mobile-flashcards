@@ -16,8 +16,14 @@ export default class Quiz extends Component {
     return (
       <View>
         <Text>This is quiz</Text>
-        <Button title='Add Card' onPress={() => navigate(addCard)} />
-        <Button title='Start Quiz' onPress={{() => navigate(startCard)} />
+
+        <TouchableOpacity>
+          <Text>Correct</Text>
+        </TouchableOpacity>
+        <TouchableOpacity>
+          <Text>Incorrect</Text>
+        </TouchableOpacity>
+
       </View>
     )
   }
