@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, TextInput, AsyncStorage,
    Alert, Button, StyleSheet, TouchableOpacity
 } from 'react-native';
-import * as helpers from '../helpers';
+import * as api from '../utils/api';
 
 export default class New_Deck extends Component {
   constructor(){
@@ -22,8 +22,15 @@ export default class New_Deck extends Component {
       questions: [],
     };
     AsyncStorage.mergeItem(KEY, JSON.stringify(obj));
-
     this.textInput.clear();
+
+    const { navigate } = this.props.navigation;
+    Alert.alert(
+      "WOW", "You craeted one deck!",
+      [{text: 'OK', onPress: () => navigate("Decks", { reload: true})}])
+
+
+    // this.props.navigation.goBack();
   }
 
   render() {
@@ -61,6 +68,7 @@ const styles = StyleSheet.create({
     width: 200,
     height: 35,
     alignItems: 'center',
+    justifyContent: 'center',
     backgroundColor: 'black',
     borderRadius: 10,
   },

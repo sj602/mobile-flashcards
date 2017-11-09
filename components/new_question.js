@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { View, Text, TextInput, AsyncStorage,
    Alert, Button, StyleSheet, TouchableOpacity
 } from 'react-native';
-import * as helpers from '../helpers';
 
 export default class New_Question extends Component {
   constructor(){
@@ -16,15 +15,18 @@ export default class New_Question extends Component {
 
   submitQuestion() {
     const KEY = 'KEY';
-    const deck = this.props.navigation.state.params.deck;
+    const { deck } = this.props.navigation.state.params;
     let { quiz } = this.state;
+    let { answer } = thi.state;
     let obj = {};
-    obj[deck] = {
-      questions: {},
+    obj[deck][questions] = {
+      quiz: quiz,
+      answer: answer
     };
     AsyncStorage.mergeItem(KEY, JSON.stringify(obj));
 
-    this.textInput.clear();
+    this.QuizInput.clear();
+    this.AnswerInput.clear();
   }
 
   render() {
@@ -33,7 +35,7 @@ export default class New_Question extends Component {
         <Text style={styles.textTitle}>What is the title of your new deck?</Text>
         <TextInput placeholder="Quiz" ref={ref => this.QuizInput = ref} onChangeText={quiz => this.setState({ quiz })} />
         <TextInput placeholder="Answer" ref={ref => this.AnswerInput = ref} onChangeText={answer => this.setState({ answer })} />
-        <TouchableOpacity style={styles.submit} onPress={this.submitQuiz}>
+        <TouchableOpacity style={styles.submit} onPress={this.submitQuestion}>
             <Text style={styles.textSubmit}>Submit</Text>
         </TouchableOpacity>
       </View>

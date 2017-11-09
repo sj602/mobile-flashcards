@@ -1,27 +1,36 @@
 import React, { Component } from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import {
+  View, Text, Button, StyleSheet, TouchableOpacity
+} from 'react-native';
 
 export default class Quiz extends Component {
-  addCard() {
-    return;
-  }
+  state = {
+    questions: [],
+  };
 
-  startQuiz() {
-    return;
+  componentDidMount() {
+    const { questions } = this.props.navigation.state.params;
+    this.setState({ questions });
   }
 
   render() {
-    const { navigate } = this.props.navigation;
+    const { questions } = this.state;
+
+    //   { questions.map(quizSet => return (
+    //     <Text>{ quizSet[quiz] }</Text>
+    //     <Text>{ quizSet[answer] }</Text>
+    //   ))
+    // }
+
 
     return (
-      <View>
-        <Text>This is quiz</Text>
+      <View style={styles.container}>
 
         <TouchableOpacity>
-          <Text>Correct</Text>
+          <Text style={styles.buttonGreen}>Correct</Text>
         </TouchableOpacity>
         <TouchableOpacity>
-          <Text>Incorrect</Text>
+          <Text style={styles.buttonRed}>Incorrect</Text>
         </TouchableOpacity>
 
       </View>
@@ -30,12 +39,17 @@ export default class Quiz extends Component {
 }
 
 const styles = StyleSheet.create({
-  buttonBlack: {
-    backgroundColor: 'black',
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  buttonGreen: {
+    backgroundColor: 'green',
     alignItems: 'center'
   },
-  buttonWhite: {
-    backgroundColor: 'white',
+  buttonRed: {
+    backgroundColor: 'red',
   }
 
 })

@@ -8,7 +8,7 @@ import New_Deck from './components/new_deck';
 import DeckDetail from './components/deckDetail';
 import Quiz from './components/quiz';
 import New_Question from './components/new_question';
-
+import { setLocalNotification } from './utils/helpers'
 
 function AppStatusBar ({ backgroundColor, ...props }) {
   return (
@@ -31,12 +31,11 @@ const Tabs = TabNavigator({
       tabBarLabel: 'New Deck',
     }
   }
-},
-// {
-//   tabBarOptions: {
-//     activeTintColor: Platform.OS === 'ios' ? purple : white,
-//   }
-// }
+}, {
+  navigationOptions: {
+    header: null // header null해서 메인화면의 stack navigation header부분이 없어졌음
+  }
+}
 );
 
 const Stacks = StackNavigator({
@@ -58,6 +57,10 @@ const Stacks = StackNavigator({
 })
 
 export default class App extends Component {
+  componentDidMount() {
+    setLocalNotification();
+  }
+  
   render() {
     return (
       <View style={styles.container}>
