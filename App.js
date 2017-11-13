@@ -49,10 +49,16 @@ const Stacks = StackNavigator({
     }
   },
   Quiz: {
-    screen: Quiz
+    screen: Quiz,
+    navigationOptions: {
+      title: 'Quiz'
+    }
   },
   New_Question: {
-    screen: New_Question
+    screen: New_Question,
+    navigationOptions: {
+      title: 'New Question'
+    }
   }
 })
 
@@ -60,7 +66,7 @@ export default class App extends Component {
   componentDidMount() {
     setLocalNotification();
   }
-  
+
   render() {
     return (
       <View style={styles.container}>

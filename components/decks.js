@@ -14,6 +14,7 @@ export default class Decks extends Component {
     decks: {},
     isReady: false,
     hasDecks: false,
+    reload: false,
   };
 
   componentWillReceiveProps(nextProps) {
@@ -50,7 +51,7 @@ export default class Decks extends Component {
 
     const { navigate } = this.props.navigation;
     const { decks } = this.state;
-    console.log(decks);
+    // console.log(Object.keys(decks).map(deck => decks[deck].title));
     return (
       <ScrollView>
         <Button title='Clear Storage' onPress={() => AsyncStorage.clear()} />
@@ -59,10 +60,11 @@ export default class Decks extends Component {
             <TouchableOpacity key={deck}
                               style={styles.container}
                               onPress={() => navigate('DeckDetail',
-                                {title: deck.title, questions: deck.questions})
+                                {title: decks[deck].title, questions: decks[deck].questions})
                               }>
               <View style={styles.deck}>
-                <Text style={styles.title}>{deck}</Text>
+                <Text style={styles.title}>{decks[deck].title}</Text>
+                <Text style={styles.cards}>{decks[deck].questions.length === 0 ? 0 : decks[deck].questions.length} cards</Text>
               </View>
             </TouchableOpacity>
           )})

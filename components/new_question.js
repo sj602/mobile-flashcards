@@ -7,7 +7,7 @@ export default class New_Question extends Component {
   constructor(){
     super();
     this.state = {
-      quiz: '',
+      question: '',
       answer: '',
     };
     this.submitQuestion = this.submitQuestion.bind(this);
@@ -15,25 +15,31 @@ export default class New_Question extends Component {
 
   submitQuestion() {
     const KEY = 'KEY';
-    const { deck } = this.props.navigation.state.params;
-    let { quiz } = this.state;
-    let { answer } = thi.state;
+    const { title } = this.props.navigation.state.params;
+    const { questions } = this.props.navigation.state.params;
+    let { question } = this.state;
+    let { answer } = this.state;
+    // console.log(question, answer, title);
     let obj = {};
-    obj[deck][questions] = {
-      quiz: quiz,
-      answer: answer
-    };
+    obj[title] = {
+      questions : [{
+        question: question,
+        answer: answer
+      }],
+    }
     AsyncStorage.mergeItem(KEY, JSON.stringify(obj));
 
     this.QuizInput.clear();
     this.AnswerInput.clear();
+
+    this.props.navigation.navigate('DeckDetail', { reload: true });
   }
 
   render() {
     return (
       <View style={styles.view}>
         <Text style={styles.textTitle}>What is the title of your new deck?</Text>
-        <TextInput placeholder="Quiz" ref={ref => this.QuizInput = ref} onChangeText={quiz => this.setState({ quiz })} />
+        <TextInput placeholder="Quiz" ref={ref => this.QuizInput = ref} onChangeText={question => this.setState({ question })} />
         <TextInput placeholder="Answer" ref={ref => this.AnswerInput = ref} onChangeText={answer => this.setState({ answer })} />
         <TouchableOpacity style={styles.submit} onPress={this.submitQuestion}>
             <Text style={styles.textSubmit}>Submit</Text>
