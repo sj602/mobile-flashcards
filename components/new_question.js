@@ -7,6 +7,7 @@ export default class New_Question extends Component {
   constructor(){
     super();
     this.state = {
+      questions: [],
       question: '',
       answer: '',
     };
@@ -16,26 +17,39 @@ export default class New_Question extends Component {
   submitQuestion() {
     const KEY = 'KEY';
     const { title } = this.props.navigation.state.params;
-    const { questions } = this.props.navigation.state.params;
+    let { questions } = this.props.navigation.state.params;
     let { question } = this.state;
     let { answer } = this.state;
-    // console.log(question, answer, title);
+
     let obj = {};
-    obj[title] = {
-      questions : [{
-        question: question,
-        answer: answer
-      }],
+    obj = {
+      question: question,
+      answer: answer,
     }
-    AsyncStorage.mergeItem(KEY, JSON.stringify(obj));
+    // obj[title] = {
+    //   questions : [{
+    //     question: question,
+    //     answer: answer
+    //   }],
+    // }
+    questions.push(obj);
+    console.log('questions: ', questions)
+    // this.setState({ questions: questions.push(obj) })
+    // console.log('questions: ', questions)
+    console.log('obj: ', obj)
+    console.log('questions_push :', this.state.questions)
+    // AsyncStorage.mergeItem(KEY, JSON.stringify(obj));
+    // AsyncStorage.getItem(KEY).then(result => console.log(JSON.parse(result)) )
 
     this.QuizInput.clear();
     this.AnswerInput.clear();
 
-    this.props.navigation.navigate('DeckDetail', { reload: true });
+    // this.props.navigation.navigate('DeckDetail', { reload: true, new_questions: questions });
   }
 
   render() {
+    // const { questions } = this.props.navigation.state.params;
+    // console.log('new_question : ', questions)
     return (
       <View style={styles.view}>
         <Text style={styles.textTitle}>What is the title of your new deck?</Text>

@@ -48,10 +48,12 @@ export default class Decks extends Component {
       )
     }
 
+    // console.log(this.state.decks)
+
 
     const { navigate } = this.props.navigation;
     const { decks } = this.state;
-    // console.log(Object.keys(decks).map(deck => decks[deck].title));
+
     return (
       <ScrollView>
         <Button title='Clear Storage' onPress={() => AsyncStorage.clear()} />
