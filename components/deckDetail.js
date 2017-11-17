@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import {
   View, Text, Button, StyleSheet, TouchableOpacity,
 } from 'react-native';
-// import New_Question from './new_question';
-// import Quiz from './quiz';
 
 export default class DeckDetail extends Component {
   state = {
@@ -19,7 +17,6 @@ export default class DeckDetail extends Component {
       const { title } = this.state
       AsyncStorage.getItem(KEY).then(result => JSON.parse(result))
         .then(data => {
-          // this.setState({ questions: data[title][questions] })
           console.log(title, this.props.navigation.state.param.new_questions)
         })
     }

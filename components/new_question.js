@@ -30,13 +30,6 @@ export default class New_Question extends Component {
     previous_questions.push(obj);
     console.log('questions: ', previous_questions)
 
-    // this.setState({ questions: questions.push(obj) })
-    // console.log('questions: ', questions)
-    // console.log('obj: ', obj)
-    // console.log('questions_push :', this.state.questions)
-    // AsyncStorage.mergeItem(KEY, JSON.stringify(obj));
-    // AsyncStorage.getItem(KEY).then(result => console.log(JSON.parse(result)) )
-
     this.QuizInput.clear();
     this.AnswerInput.clear();
 
@@ -44,9 +37,6 @@ export default class New_Question extends Component {
   }
 
   render() {
-    // const { questions } = this.props.navigation.state.params;
-    // console.log('new_question : ', questions)
-    // console.log(this.props.navigation.state.params.title)
     return (
       <View style={styles.view}>
         <TextInput placeholder="Quiz" ref={ref => this.QuizInput = ref} onChangeText={question => this.setState({ question })} />

@@ -7,8 +7,6 @@ import {
 import * as api from '../utils/api';
 import { TabNavigator, StackNavigator } from 'react-navigation';
 
-
-
 export default class Decks extends Component {
   state = {
     decks: {},
@@ -27,7 +25,7 @@ export default class Decks extends Component {
     }
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const KEY = 'KEY';
     AsyncStorage.getItem(KEY).then(result => JSON.parse(result))
       .then(data => {
@@ -54,12 +52,9 @@ export default class Decks extends Component {
       )
     }
 
-    // console.log(this.state.decks)
-
-
     const { navigate } = this.props.navigation;
     const { decks } = this.state;
-    // console.log(decks['React']['questions'])
+
     return (
       <ScrollView>
         <Button title='Clear Storage' onPress={() => {
