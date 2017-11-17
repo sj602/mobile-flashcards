@@ -13,24 +13,18 @@ export default class DeckDetail extends Component {
     reload: false,
   };
 
-  // componentWillReceiveProps(nextProps) {
-  //   if(nextProps.navigation.state.params.reload) {
-  //     const KEY = 'KEY';
-  //     let obj = {};
-  //     console.log(this.props.navigation.state.params.new_questions)
-      // const new_questions = nextProps.navigation.state.param.new_questions;
-      // this.setState({ questions: new_questions });
-      // obj[this.state.title] = {
-      //   questions : this.state.questions
-      // }
-      // AsyncStorage.mergeItem(KEY, JSON.stringify(obj))
-      // AsyncStorage.getItem(KEY).then(result => JSON.parse(result))
-      //   .then(data => {
-      //     console.log(data)
-      //     // this.setState({ questions : data[this.state.title][questions] });
-      //   })
-  //   }
-  // }
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.navigation.state.params.reload) {
+      const KEY = 'KEY';
+      const { title } = this.state
+      AsyncStorage.getItem(KEY).then(result => JSON.parse(result))
+        .then(data => {
+          // this.setState({ questions: data[title][questions] })
+          console.log(title, this.props.navigation.state.param.new_questions)
+        })
+    }
+  }
+
 
   componentDidMount() {
     const { title } = this.props.navigation.state.params;
@@ -42,12 +36,12 @@ export default class DeckDetail extends Component {
     const { navigate } = this.props.navigation;
     const { title } = this.state;
     const { questions } = this.state;
-    const number = this.state.questions.length;
-    console.log('deck detail: ', questions);
+    // const number = this.state.questions.length;
+    // console.log('deck detail: ', title);
     return (
       <View>
         <Text>{title}</Text>
-        <Text>{number} cards</Text>
+        <Text>{questions.length} cards</Text>
 
         <TouchableOpacity style={styles.buttonWhite} onPress={() => navigate('New_Question',
           {title: title, questions: questions})}>

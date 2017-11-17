@@ -27,12 +27,18 @@ export default class Decks extends Component {
     }
   }
 
-  componentDidMount() {
+  componentWillMount() {
     const KEY = 'KEY';
     AsyncStorage.getItem(KEY).then(result => JSON.parse(result))
       .then(data => {
-        this.setState({ decks: data })})
-      .then(() => this.setState({ isReady: true, hasDecks: true }))
+        console.log(data)
+        if( data === null ){
+          this.setState({ hasDecks: false })
+        } else {
+          this.setState({ decks: data, hasDecks: true })
+        }
+      })
+      .then(() => this.setState({ isReady: true }))
   }
 
   render() {
@@ -43,7 +49,7 @@ export default class Decks extends Component {
     if(!this.state.hasDecks) {
       const { navigate } = this.props.navigation;
       Alert.alert(
-        "HEY", "You dont have any decks yet, Go create one!",
+        "HEY", "You don't have any decks yet, Go create one!",
         [{text: 'OK', onPress: () => navigate("New_Deck")}]
       )
     }
@@ -53,10 +59,12 @@ export default class Decks extends Component {
 
     const { navigate } = this.props.navigation;
     const { decks } = this.state;
-
+    // console.log(decks['React']['questions'])
     return (
       <ScrollView>
-        <Button title='Clear Storage' onPress={() => AsyncStorage.clear()} />
+        <Button title='Clear Storage' onPress={() => {
+          this.setState({ decks: {} })
+          AsyncStorage.clear()}} />
         { Object.keys(decks).map((deck) => {
           return (
             <TouchableOpacity key={deck}
@@ -66,7 +74,7 @@ export default class Decks extends Component {
                               }>
               <View style={styles.deck}>
                 <Text style={styles.title}>{decks[deck].title}</Text>
-                <Text style={styles.cards}>{decks[deck].questions.length === 0 ? 0 : decks[deck].questions.length} cards</Text>
+                <Text style={styles.cards}>{decks[deck].questions.length} cards</Text>
               </View>
             </TouchableOpacity>
           )})
