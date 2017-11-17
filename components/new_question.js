@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, TextInput, AsyncStorage,
-   Alert, Button, StyleSheet, TouchableOpacity
+   Alert, Button, StyleSheet, TouchableOpacity,
+   KeyboardAvoidingView
 } from 'react-native';
 
 export default class New_Question extends Component {
@@ -38,9 +39,9 @@ export default class New_Question extends Component {
 
   render() {
     return (
-      <View style={styles.view}>
-        <TextInput placeholder="Quiz" ref={ref => this.QuizInput = ref} onChangeText={question => this.setState({ question })} />
-        <TextInput placeholder="Answer" ref={ref => this.AnswerInput = ref} onChangeText={answer => this.setState({ answer })} />
+      <View style={styles.container}>
+        <TextInput style={{width: 300}} placeholder="Quiz" ref={ref => this.QuizInput = ref} onChangeText={question => this.setState({ question })} />
+        <TextInput style={{width: 300}} placeholder="Answer" ref={ref => this.AnswerInput = ref} onChangeText={answer => this.setState({ answer })} />
         <TouchableOpacity style={styles.submit} onPress={this.submitQuestion}>
             <Text style={styles.textSubmit}>Submit</Text>
         </TouchableOpacity>
@@ -50,9 +51,13 @@ export default class New_Question extends Component {
 }
 
 const styles = StyleSheet.create({
-  view: {
+  container: {
     flex: 1,
     flexDirection: 'column',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    paddingTop: 50,
+    backgroundColor: 'white'
   },
 
   textSubmit: {
@@ -61,10 +66,10 @@ const styles = StyleSheet.create({
   },
 
   submit: {
-    flexDirection: 'column',
     marginTop: 30,
     width: 200,
     height: 35,
+    justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'black',
     borderRadius: 10,

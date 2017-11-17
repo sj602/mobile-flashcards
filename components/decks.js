@@ -63,13 +63,19 @@ export default class Decks extends Component {
 
     return (
       <ScrollView contentContainerStyle={styles.contentContainer}>
-        <Button title='Clear Storage' onPress={() => {
-          this.setState({ decks: {} })
-          AsyncStorage.clear()}} />
+        <TouchableOpacity
+                        onPress={() => {
+                        this.setState({ decks: {} })
+                        AsyncStorage.clear()}}
+                        >
+          <View style={styles.deleteDecks}>
+            <Text style={{fontSize: 15, color: 'white', textAlign: 'center'}}>Delete All Decks</Text>
+          </View>
+        </TouchableOpacity>
+        <View style={{height: 40}}/>
         { Object.keys(decks).map((deck) => {
           return (
-            <TouchableOpacity key={deck}
-                              style={styles.container}
+            <TouchableOpacity style={{ flexDirection: 'row' }}
                               onPress={() => navigate('DeckDetail',
                                 {title: decks[deck].title, questions: decks[deck].questions})
                               }>
@@ -89,24 +95,31 @@ export default class Decks extends Component {
 
 const styles = StyleSheet.create({
   contentContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    backgroundColor: 'white'
+  },
+
+  deleteDecks: {
+    backgroundColor: 'deepskyblue',
+    width: 200,
+    height: 50,
+    borderRadius: 10,
+    justifyContent: 'center'
   },
 
   container: {
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
   },
 
   deck: {
-    flexDirection: 'column',
+    flex: 1,
     height: 150,
     justifyContent: 'center',
     alignItems: 'center',
     paddingBottom: 70,
-    backgroundColor: '#fff',
+    backgroundColor: 'white',
     borderBottomColor: 'black',
     borderBottomWidth: StyleSheet.hairlineWidth,
     shadowRadius: 3,
