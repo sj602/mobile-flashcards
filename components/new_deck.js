@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, TextInput, AsyncStorage,
-   Alert, Button, StyleSheet, TouchableOpacity
+   Alert, Button, StyleSheet, TouchableOpacity,
+   KeyboardAvoidingView
 } from 'react-native';
 import * as api from '../utils/api';
 
@@ -26,7 +27,7 @@ export default class New_Deck extends Component {
 
     const { navigate } = this.props.navigation;
     Alert.alert(
-      "WOW", "You craeted one deck!",
+      "WOW", "You created one deck!",
       [{text: 'OK', onPress: () => navigate("Decks", { reload: true })}])
 
 
@@ -35,26 +36,30 @@ export default class New_Deck extends Component {
 
   render() {
     return (
-      <View style={styles.view}>
+      <KeyboardAvoidingView style={styles.container} behavior="padding">
         <Text style={styles.textTitle}>What is the title of your new deck?</Text>
-        <TextInput placeholder="Deck Title" ref={ref => this.textInput = ref} textAlign="center" onChangeText={deck => this.setState({ deck })} />
+        <TextInput style={{width: 250}} placeholder="Deck Title" ref={ref => this.textInput = ref} textAlign="center" onChangeText={deck => this.setState({ deck })} />
         <TouchableOpacity style={styles.submit} onPress={this.submitDeck}>
             <Text style={styles.textSubmit}>Create New Deck!</Text>
         </TouchableOpacity>
-      </View>
+        <View style={{ height: 60 }} />
+      </KeyboardAvoidingView>
     )
   }
 }
 
 const styles = StyleSheet.create({
-  view: {
+  container: {
     flex: 1,
     flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
 
   textTitle: {
     fontSize: 25,
-    textAlign: 'center'
+    textAlign: 'center',
+    marginBottom: 100
   },
 
   textSubmit: {
@@ -63,7 +68,6 @@ const styles = StyleSheet.create({
   },
 
   submit: {
-    flexDirection: 'column',
     marginTop: 30,
     width: 200,
     height: 35,

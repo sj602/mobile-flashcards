@@ -20,8 +20,14 @@ export default class Decks extends Component {
       const KEY = 'KEY';
       AsyncStorage.getItem(KEY).then(result => JSON.parse(result))
         .then(data => {
-          this.setState({ decks: data })})
-        .then(() => this.setState({ isReady: true, hasDecks: true }))
+          console.log(data)
+          if( data === null ){
+            this.setState({ hasDecks: false })
+          } else {
+            this.setState({ decks: data, hasDecks: true })
+          }
+        })
+        .then(() => this.setState({ isReady: true }))
     }
   }
 
@@ -56,7 +62,7 @@ export default class Decks extends Component {
     const { decks } = this.state;
 
     return (
-      <ScrollView>
+      <ScrollView contentContainerStyle={styles.contentContainer}>
         <Button title='Clear Storage' onPress={() => {
           this.setState({ decks: {} })
           AsyncStorage.clear()}} />
@@ -82,16 +88,28 @@ export default class Decks extends Component {
 }
 
 const styles = StyleSheet.create({
+  contentContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+
   container: {
+    flex: 1,
+    justifyContent: 'center',
     alignItems: 'center'
   },
 
   deck: {
+    flexDirection: 'column',
+    height: 150,
+    justifyContent: 'center',
     alignItems: 'center',
     paddingBottom: 70,
     backgroundColor: '#fff',
     borderBottomColor: 'black',
     borderBottomWidth: StyleSheet.hairlineWidth,
+    shadowRadius: 3,
   },
 
   title: {

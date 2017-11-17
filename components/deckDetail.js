@@ -12,6 +12,7 @@ export default class DeckDetail extends Component {
   };
 
   componentWillReceiveProps(nextProps) {
+    console.log('receivedNewProps')
     if(nextProps.navigation.state.params.reload) {
       const KEY = 'KEY';
       const { title } = this.state
@@ -33,12 +34,11 @@ export default class DeckDetail extends Component {
     const { navigate } = this.props.navigation;
     const { title } = this.state;
     const { questions } = this.state;
-    // const number = this.state.questions.length;
-    // console.log('deck detail: ', title);
+
     return (
-      <View>
-        <Text>{title}</Text>
-        <Text>{questions.length} cards</Text>
+      <View style={styles.container}>
+        <Text style={styles.deckTitle}>{title}</Text>
+        <Text style={styles.cards}>{questions.length} cards</Text>
 
         <TouchableOpacity style={styles.buttonWhite} onPress={() => navigate('New_Question',
           {title: title, questions: questions})}>
@@ -55,6 +55,23 @@ export default class DeckDetail extends Component {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  deckTitle: {
+    fontSize: 30,
+  },
+
+  cards: {
+    color: 'gray',
+    marginBottom: 100,
+    marginTop: 20,
+  },
+
   buttonBlack: {
     width: 150,
     height: 30,
@@ -67,6 +84,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderRadius: 10,
   },
+
   buttonWhite: {
     width: 150,
     height: 30,
