@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, TextInput, AsyncStorage,
    Alert, Button, StyleSheet, TouchableOpacity,
-   KeyboardAvoidingView
+   KeyboardAvoidingView, Keyboard
 } from 'react-native';
 
 export default class New_Question extends Component {
@@ -27,14 +27,24 @@ export default class New_Question extends Component {
       question: question,
       answer: answer,
     }
-    console.log(previous_questions, obj)
+    // console.log(previous_questions, obj)
     previous_questions.push(obj);
-    console.log('questions: ', previous_questions)
+    // console.log('questions: ', previous_questions)
 
     this.QuizInput.clear();
     this.AnswerInput.clear();
 
-    this.props.navigation.navigate('DeckDetail', { reload: true, new_questions: previous_questions });
+    Keyboard.dismiss();
+    // console.log(this.props.navigation.state.params);
+    // this.props.navigation.goBack();
+    // this.props.navigation.state.params.updateData({ title: title, questions: previous_questions });
+    AsyncStorage.getItem(KEY).then(res => JSON.parse(res))
+      .then(data => {
+        data[title]['questions'].push(previous_questions)
+        AsyncStorage.mergeItem(KEY, data)
+      })
+
+    this.props.navigation.navigate('DeckDetail', { reload: true, questions: previous_questions });
   }
 
   render() {

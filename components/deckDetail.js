@@ -7,21 +7,19 @@ export default class DeckDetail extends Component {
   state = {
     title: '',
     questions: [],
-    new_questions: [],
     reload: false,
   };
 
   componentWillReceiveProps(nextProps) {
     console.log('receivedNewProps')
-    if(nextProps.navigation.state.params.reload) {
-      const KEY = 'KEY';
-      const { title } = this.state
-      AsyncStorage.getItem(KEY).then(result => JSON.parse(result))
-        .then(data => {
-          console.log(title, this.props.navigation.state.param.new_questions)
-        })
+    // if(nextProps.navigation.state.params.reload) {
+    //   const KEY = 'KEY';
+    //   const { title } = this.state
+    //   AsyncStorage.getItem(KEY).then(result => JSON.parse(result))
+    //     .then(data => {
+    //       console.log(title, this.props.navigation.state.param.questions)
+    // })
     }
-  }
 
 
   componentDidMount() {
