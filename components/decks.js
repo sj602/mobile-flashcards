@@ -20,7 +20,6 @@ export default class Decks extends Component {
       const KEY = 'KEY';
       AsyncStorage.getItem(KEY).then(result => JSON.parse(result))
         .then(data => {
-          console.log(data)
           if( data === null ){
             this.setState({ hasDecks: false })
           } else {
@@ -35,7 +34,6 @@ export default class Decks extends Component {
     const KEY = 'KEY';
     AsyncStorage.getItem(KEY).then(result => JSON.parse(result))
       .then(data => {
-        console.log(data)
         if( data === null ){
           this.setState({ hasDecks: false })
         } else {
@@ -62,33 +60,33 @@ export default class Decks extends Component {
     const { decks } = this.state;
 
     return (
-      <ScrollView contentContainerStyle={styles.contentContainer}>
-        <TouchableOpacity
-                        onPress={() => {
-                        this.setState({ decks: {} })
-                        AsyncStorage.clear()}}
-                        >
-          <View style={styles.deleteDecks}>
-            <Text style={{fontSize: 15, color: 'white', textAlign: 'center'}}>Delete All Decks</Text>
-          </View>
-        </TouchableOpacity>
-        <View style={{height: 40}}/>
-        { Object.keys(decks).map((deck) => {
-          return (
-            <TouchableOpacity style={{ flexDirection: 'row' }}
-                              onPress={() => navigate('DeckDetail',
-                                {title: decks[deck].title, questions: decks[deck].questions})
-                              }>
-              <View style={styles.deck}>
-                <Text style={styles.title}>{decks[deck].title}</Text>
-                <Text style={styles.cards}>{decks[deck].questions.length} cards</Text>
-              </View>
-            </TouchableOpacity>
-          )})
-        }
-
-
-      </ScrollView>
+      <View style={{backgroundColor: 'white'}}>
+        <ScrollView contentContainerStyle={styles.contentContainer}>
+          <TouchableOpacity
+                          onPress={() => {
+                          this.setState({ decks: {} })
+                          AsyncStorage.clear()}}
+                          >
+            <View style={styles.deleteDecks}>
+              <Text style={{fontSize: 15, color: 'white', textAlign: 'center'}}>Delete All Decks</Text>
+            </View>
+          </TouchableOpacity>
+          <View style={{height: 40}}/>
+          { Object.keys(decks).map((deck) => {
+            return (
+              <TouchableOpacity style={{ flexDirection: 'row' }}
+                                onPress={() => navigate('DeckDetail',
+                                  {title: decks[deck].title, questions: decks[deck].questions})
+                                }>
+                <View style={styles.deck}>
+                  <Text style={styles.title}>{decks[deck].title}</Text>
+                  <Text style={styles.cards}>{decks[deck].questions.length} cards</Text>
+                </View>
+              </TouchableOpacity>
+            )})
+          }
+        </ScrollView>
+      </View>
     );
   }
 }
@@ -97,7 +95,6 @@ const styles = StyleSheet.create({
   contentContainer: {
     justifyContent: 'flex-start',
     alignItems: 'center',
-    backgroundColor: 'white'
   },
 
   deleteDecks: {

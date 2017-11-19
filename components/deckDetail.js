@@ -2,8 +2,19 @@ import React, { Component } from 'react';
 import {
   View, Text, Button, StyleSheet, TouchableOpacity,
 } from 'react-native';
+import { Ionicons } from '@expo/vector-icons'
 
 export default class DeckDetail extends Component {
+  static navigationOptions = ({ navigation }) => ({
+    headerLeft: <TouchableOpacity>
+            <Ionicons onPress={() => navigation.navigate('Decks', { reload: true })}
+              name={'md-arrow-back'}
+              size={25}
+              style={{marginLeft: 20}}
+            />
+          </TouchableOpacity>
+  })
+
   state = {
     title: '',
     questions: [],
@@ -12,13 +23,14 @@ export default class DeckDetail extends Component {
 
   componentWillReceiveProps(nextProps) {
     console.log('receivedNewProps')
-    // if(nextProps.navigation.state.params.reload) {
+    if(nextProps.navigation.state.params.reload) {
+      console.log('receivedNewProps')
     //   const KEY = 'KEY';
     //   const { title } = this.state
     //   AsyncStorage.getItem(KEY).then(result => JSON.parse(result))
     //     .then(data => {
     //       console.log(title, this.props.navigation.state.param.questions)
-    // })
+      }
     }
 
 
