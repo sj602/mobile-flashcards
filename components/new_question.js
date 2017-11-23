@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { View, Text, TextInput, AsyncStorage,
    Alert, Button, StyleSheet, TouchableOpacity,
-   KeyboardAvoidingView, Keyboard, NavigationActions
+   KeyboardAvoidingView, Keyboard
 } from 'react-native';
+import { NavigationActions } from 'react-native'
 
 export default class New_Question extends Component {
   constructor(){
