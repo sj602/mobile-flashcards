@@ -4,6 +4,7 @@ import { View, Text, TextInput, AsyncStorage,
    KeyboardAvoidingView
 } from 'react-native';
 import * as api from '../utils/api';
+import styles from '../style/new_deck';
 
 export default class New_Deck extends Component {
   constructor(){
@@ -47,35 +48,3 @@ export default class New_Deck extends Component {
     )
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'white'
-  },
-
-  textTitle: {
-    fontSize: 25,
-    textAlign: 'center',
-    marginBottom: 100
-  },
-
-  textSubmit: {
-    fontSize: 15,
-    color: 'white',
-  },
-
-  submit: {
-    marginTop: 30,
-    width: 200,
-    height: 35,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'black',
-    borderRadius: 10,
-  },
-
-});

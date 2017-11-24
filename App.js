@@ -1,22 +1,13 @@
 import React, { Component } from 'react';
-// import './ReactotronConfig';
-import { StyleSheet, Text, View, Platform, StatusBar } from 'react-native';
+import { StyleSheet, Text, View, Platform } from 'react-native';
 import { TabNavigator, StackNavigator } from 'react-navigation';
-import { Constants } from 'expo';
 import Decks from './components/decks';
 import New_Deck from './components/new_deck';
 import DeckDetail from './components/deckDetail';
 import Quiz from './components/quiz';
 import New_Question from './components/new_question';
-import { setLocalNotification } from './utils/helpers'
-
-function AppStatusBar ({ backgroundColor, ...props }) {
-  return (
-    <View style={{backgroundColor, height: Constants.statusBarHeight}}>
-      <StatusBar barStyle='light-content' />
-    </View>
-  )
-}
+import { AppStatusBar, setLocalNotification } from './utils/helpers';
+import styles from './style/App';
 
 const Tabs = TabNavigator({
   Decks: {
@@ -76,10 +67,3 @@ export default class App extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'white',
-  },
-});

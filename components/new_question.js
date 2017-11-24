@@ -3,7 +3,8 @@ import { View, Text, TextInput, AsyncStorage,
    Alert, Button, StyleSheet, TouchableOpacity,
    KeyboardAvoidingView, Keyboard
 } from 'react-native';
-import { NavigationActions } from 'react-native'
+import { NavigationActions } from 'react-native';
+import styles from '../style/new_question';
 
 export default class New_Question extends Component {
   constructor(){
@@ -17,6 +18,9 @@ export default class New_Question extends Component {
   }
 
   submitQuestion() {
+    if( !this.props.navigation ){
+      return ;
+    }
     const KEY = 'KEY';
     const { title } = this.props.navigation.state.params;
     let previous_questions = this.props.navigation.state.params.questions;
@@ -41,14 +45,14 @@ export default class New_Question extends Component {
         AsyncStorage.mergeItem(KEY, JSON.stringify(data))
       })
 
-    console.log(this.props)
-    return this.props.navigation
-               .dispatch(NavigationActions.reset(
-                 {
-                    index: 0,
-                    actions: [NavigationActions.navigate({ routeName: 'Home' })]
-                  }));
-    // this.props.navigation.navigate('DeckDetail', { reload: true, title: title, questions: previous_questions });
+    console.log(this.props.navigate)
+    // return this.props.navigation // it returns an error : undefined is not an object(NavigationActions.reset)
+    //            .dispatch(NavigationActions.reset(
+    //              {
+    //                 index: 0,
+    //                 actions: [NavigationActions.navigate({ routeName: 'Home' })]
+    //               }));
+    this.props.navigation.navigate('DeckDetail', { reload: true, title: title, questions: previous_questions });
   }
 
   render() {
@@ -63,30 +67,3 @@ export default class New_Question extends Component {
     )
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    paddingTop: 50,
-    backgroundColor: 'white'
-  },
-
-  textSubmit: {
-    fontSize: 15,
-    color: 'white',
-  },
-
-  submit: {
-    marginTop: 30,
-    width: 200,
-    height: 35,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'black',
-    borderRadius: 10,
-  },
-
-});

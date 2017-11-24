@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import {
-  StyleSheet, View, Text, AsyncStorage,
+  View, Text, AsyncStorage,
   Button, Alert, TouchableOpacity, ScrollView,
   ActivityIndicator,
 } from 'react-native';
 import * as api from '../utils/api';
 import { TabNavigator, StackNavigator } from 'react-navigation';
+import styles from '../style/decks';
 
 export default class Decks extends Component {
   state = {
@@ -90,47 +91,3 @@ export default class Decks extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  contentContainer: {
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-  },
-
-  deleteDecks: {
-    backgroundColor: 'deepskyblue',
-    width: 200,
-    height: 50,
-    borderRadius: 10,
-    justifyContent: 'center'
-  },
-
-  container: {
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-
-  deck: {
-    flex: 1,
-    height: 150,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingBottom: 70,
-    backgroundColor: 'white',
-    borderBottomColor: 'black',
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    shadowRadius: 3,
-  },
-
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    textAlign: 'center'
-  },
-
-  cards: {
-    fontSize: 15,
-    color: 'grey',
-    textAlign: 'center'
-  },
-});

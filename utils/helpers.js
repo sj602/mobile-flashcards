@@ -1,6 +1,18 @@
-import { AsyncStorage } from 'react-native';
+import React from 'react';
+import { View, StatusBar, AsyncStorage } from 'react-native';
 import { Notifications, Permissions } from 'expo';
+import { Constants } from 'expo';
 
+// * AppStatusBar * //
+export function AppStatusBar ({ backgroundColor, ...props }) {
+  return (
+    <View style={{backgroundColor, height: Constants.statusBarHeight}}>
+      <StatusBar barStyle='light-content' />
+    </View>
+  )
+}
+
+// * Notifications * //
 const NOTIFICATION_KEY = 'NOTIFICATION_KEY';
 
 export function getDailyReminderValue () {
