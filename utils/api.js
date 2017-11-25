@@ -6,17 +6,14 @@
 
 import { AsyncStorage } from 'react-native';
 
-export const KEY = 'KEY';
+const KEY = 'KEY';
 
 export const getDecks = () => {
-  AsyncStorage.getItem(KEY).then(result => JSON.parse(result))
-    .then(data => {
-      this.setState({ decks: data })})
-    .then(() => this.setState({ isReady: true, hasDecks: true }))
+  return AsyncStorage.getItem(KEY).then(result => JSON.parse(result)) // function인데 return을 안해주면 undefined에러남
 };
 
 export const getDeck = (title) => {
-  AsyncStorage.getItem(KEY).then(result => JSON.parse(result))
+  return AsyncStorage.getItem(KEY).then(result => JSON.parse(result))
     .then(data => data[title]);
 }
 
@@ -26,14 +23,19 @@ export const saveDeckTitle = (title) => {
     title: title,
     questions: [],
   };
-  AsyncStorage.mergeItem(KEY, obj);
+  return AsyncStorage.mergeItem(KEY, JSON.stringify(obj));
 }
 
 export const addCardToDeck = (title, card) => {
-  let obj = {};
-  obj[title] = {
-    title: title,
-    questions: [{ card }],
-  };
-  AsyncStorage.mergeItem(KEY, obj);
+  let obj = {}
+  obj = {
+    question: card['question'],
+    answer: card['answer'],
+  }
+
+  return AsyncStorage.getItem(KEY).then(res => JSON.parse(res))
+    .then(data => {
+      data[title]['questions'].push(obj)
+      return AsyncStorage.mergeItem(KEY, JSON.stringify(data))
+    })
 }

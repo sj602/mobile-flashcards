@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import {
   View, Text, Button, StyleSheet, TouchableOpacity,
 } from 'react-native';
-import { Ionicons } from '@expo/vector-icons'
+import { Ionicons } from '@expo/vector-icons';
+import styles from '../style/deckDetail';
+import { getDeck } from '../utils/api';
 
 export default class DeckDetail extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -23,27 +25,33 @@ export default class DeckDetail extends Component {
 
   componentWillReceiveProps(nextProps) {
     console.log('receivedNewProps')
-    if(nextProps.navigation.state.params.reload) {
-      console.log('receivedNewProps')
-    //   const KEY = 'KEY';
-    //   const { title } = this.state
-    //   AsyncStorage.getItem(KEY).then(result => JSON.parse(result))
-    //     .then(data => {
-    //       console.log(title, this.props.navigation.state.param.questions)
-      }
-    }
+    // if(nextProps.navigation.state.params.reload) {
+    //   getDeck(title).then((data) => {
+    //     this.setState({
+    //       title: title,
+    //       questions: data['questions']
+    //     });
+    //   })
+    // }
+  }
 
+  componentWillMount() {
+    const { title } = this.props.navigation.state.params || this.state.title;
 
-  componentDidMount() {
-    const { title } = this.props.navigation.state.params;
-    const { questions } = this.props.navigation.state.params;
-    this.setState({ title, questions });
+    getDeck(title).then((data) => {
+      this.setState({
+        title: title,
+        questions: data['questions']
+      });
+    })
   }
 
   render() {
     const { navigate } = this.props.navigation;
     const { title } = this.state;
     const { questions } = this.state;
+
+    // console.log(this.state)
 
     return (
       <View style={styles.container}>
@@ -63,50 +71,3 @@ export default class DeckDetail extends Component {
     )
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'white'
-  },
-
-  deckTitle: {
-    fontSize: 30,
-  },
-
-  cards: {
-    color: 'gray',
-    marginBottom: 100,
-    marginTop: 20,
-  },
-
-  buttonBlack: {
-    width: 150,
-    height: 30,
-    backgroundColor: 'black',
-    // flexDirection: 'column',
-    marginTop: 10,
-    width: 200,
-    height: 35,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 10,
-  },
-
-  buttonWhite: {
-    width: 150,
-    height: 30,
-    backgroundColor: 'white',
-    marginTop: 100,
-    width: 200,
-    height: 35,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 10,
-    borderWidth: 0.5,
-    borderColor: 'black'
-  }
-});

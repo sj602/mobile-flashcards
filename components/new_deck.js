@@ -3,7 +3,7 @@ import { View, Text, TextInput, AsyncStorage,
    Alert, Button, StyleSheet, TouchableOpacity,
    KeyboardAvoidingView
 } from 'react-native';
-import * as api from '../utils/api';
+import { saveDeckTitle } from '../utils/api';
 import styles from '../style/new_deck';
 
 export default class New_Deck extends Component {
@@ -16,14 +16,8 @@ export default class New_Deck extends Component {
   }
 
   submitDeck() {
-    const KEY = 'KEY';
     let { deck } = this.state;
-    let obj = {};
-    obj[deck] = {
-      title: deck,
-      questions: [],
-    };
-    AsyncStorage.mergeItem(KEY, JSON.stringify(obj));
+    saveDeckTitle(deck);
     this.textInput.clear();
 
     const { navigate } = this.props.navigation;

@@ -5,6 +5,7 @@ import { View, Text, TextInput, AsyncStorage,
 } from 'react-native';
 import { NavigationActions } from 'react-native';
 import styles from '../style/new_question';
+import { addCardToDeck } from '../utils/api';
 
 export default class New_Question extends Component {
   constructor(){
@@ -21,7 +22,6 @@ export default class New_Question extends Component {
     if( !this.props.navigation ){
       return ;
     }
-    const KEY = 'KEY';
     const { title } = this.props.navigation.state.params;
     let previous_questions = this.props.navigation.state.params.questions;
     let { question } = this.state;
@@ -32,6 +32,9 @@ export default class New_Question extends Component {
       question: question,
       answer: answer,
     }
+
+    addCardToDeck(title, obj);
+
     previous_questions.push(obj);
 
     this.QuizInput.clear();
@@ -39,20 +42,13 @@ export default class New_Question extends Component {
 
     Keyboard.dismiss();
 
-    AsyncStorage.getItem(KEY).then(res => JSON.parse(res))
-      .then(data => {
-        data[title]['questions'].push(obj)
-        AsyncStorage.mergeItem(KEY, JSON.stringify(data))
-      })
-
-    console.log(this.props.navigate)
     // return this.props.navigation // it returns an error : undefined is not an object(NavigationActions.reset)
     //            .dispatch(NavigationActions.reset(
     //              {
     //                 index: 0,
     //                 actions: [NavigationActions.navigate({ routeName: 'Home' })]
     //               }));
-    this.props.navigation.navigate('DeckDetail', { reload: true, title: title, questions: previous_questions });
+    this.props.navigation.navigate('DeckDetail', { reload: false, title: title, questions: previous_questions });
   }
 
   render() {

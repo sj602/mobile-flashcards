@@ -9,35 +9,22 @@ export default StyleSheet.create({
     backgroundColor: 'white'
   },
 
-  percentage: {
-    paddingBottom: 50,
-  },
-
-  textView: {
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-
-  text1: {
+  deckTitle: {
     fontSize: 30,
-    justifyContent: 'center',
-    alignItems: 'center',
-    textAlign: 'center'
   },
 
-  text2: {
-    fontSize: 15,
-    color: 'red',
-    justifyContent: 'center',
-    alignItems: 'center',
-    textAlign: 'center'
+  cards: {
+    color: 'gray',
+    marginBottom: 100,
+    marginTop: 20,
   },
 
-  buttonGreen: {
+  buttonBlack: {
     width: 150,
     height: 30,
-    backgroundColor: 'green',
-    marginTop: 40,
+    backgroundColor: 'black',
+    // flexDirection: 'column',
+    marginTop: 10,
     width: 200,
     height: 35,
     alignItems: 'center',
@@ -45,17 +32,17 @@ export default StyleSheet.create({
     borderRadius: 10,
   },
 
-  buttonRed: {
+  buttonWhite: {
     width: 150,
     height: 30,
-    backgroundColor: 'red',
-    marginTop: 20,
+    backgroundColor: 'white',
+    marginTop: 100,
     width: 200,
     height: 35,
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 10,
     borderWidth: 0.5,
-    borderColor: 'black',
+    borderColor: 'black'
   }
-})
+});

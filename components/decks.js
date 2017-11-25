@@ -4,7 +4,7 @@ import {
   Button, Alert, TouchableOpacity, ScrollView,
   ActivityIndicator,
 } from 'react-native';
-import * as api from '../utils/api';
+import { getDecks } from '../utils/api';
 import { TabNavigator, StackNavigator } from 'react-navigation';
 import styles from '../style/decks';
 
@@ -18,8 +18,7 @@ export default class Decks extends Component {
 
   componentWillReceiveProps(nextProps) {
     if(nextProps.navigation.state.params.reload) {
-      const KEY = 'KEY';
-      AsyncStorage.getItem(KEY).then(result => JSON.parse(result))
+      getDecks()
         .then(data => {
           if( data === null ){
             this.setState({ hasDecks: false })
@@ -32,16 +31,16 @@ export default class Decks extends Component {
   }
 
   componentDidMount() {
-    const KEY = 'KEY';
-    AsyncStorage.getItem(KEY).then(result => JSON.parse(result))
+    getDecks()
       .then(data => {
-        if( data === null ){
-          this.setState({ hasDecks: false })
-        } else {
-          this.setState({ decks: data, hasDecks: true })
-        }
-      })
+          if( data === null ){
+            this.setState({ hasDecks: false })
+          } else {
+            this.setState({ decks: data, hasDecks: true })
+          }
+        })
       .then(() => this.setState({ isReady: true }))
+
   }
 
   render() {
@@ -75,7 +74,8 @@ export default class Decks extends Component {
           <View style={{height: 40}}/>
           { Object.keys(decks).map((deck) => {
             return (
-              <TouchableOpacity style={{ flexDirection: 'row' }}
+              <TouchableOpacity key={decks[deck].title}
+                                style={{ flexDirection: 'row' }}
                                 onPress={() => navigate('DeckDetail',
                                   {title: decks[deck].title, questions: decks[deck].questions})
                                 }>
