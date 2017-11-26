@@ -24,8 +24,7 @@ export default class New_Question extends Component {
     }
     const { title } = this.props.navigation.state.params;
     let previous_questions = this.props.navigation.state.params.questions;
-    let { question } = this.state;
-    let { answer } = this.state;
+    const { question, answer } = this.state;
 
     let obj = {};
     obj = {

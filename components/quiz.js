@@ -6,38 +6,28 @@ import {
 import styles from '../style/quiz';
 
 export default class Quiz extends Component {
-  constructor() {
-    super()
-    this.state = {
-      questions: [],
-      cloneQuestions: [],
-      flipped: false,
-      correctQuestions: [],
-    }
-
-    this.handleFlipped = this.handleFlipped.bind(this);
-    this.checkAnswer = this.checkAnswer.bind(this);
+  state = {
+    questions: [],
+    cloneQuestions: [],
+    flipped: false,
+    correctQuestions: [],
   }
 
   componentWillMount() {
     const { questions } = this.props.navigation.state.params;
     console.log("componentWillMount's questions: ", questions)
     this.setState({
-                    questions: questions,
-                    cloneQuestions: questions.slice(0)
-                  });
+      questions: questions,
+      cloneQuestions: questions.slice(0)
+    });
 
   }
 
-  handleFlipped() {
-    if(this.state.flipped === false){
-      this.setState({ flipped: true })
-    }else{
-      this.setState({ flipped: false })
-    }
+  handleFlipped = () => {
+    this.setState((state) => ({ flipped: !state.flipped }))
   }
 
-  checkAnswer() {
+  checkAnswer = () => {
     const { questions } = this.state
     const { cloneQuestions } = this.state
     // console.log(questions[0]["question"], questions[0]["answer"])
