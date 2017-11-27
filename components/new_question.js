@@ -41,12 +41,6 @@ export default class New_Question extends Component {
 
     Keyboard.dismiss();
 
-    // return this.props.navigation // it returns an error : undefined is not an object(NavigationActions.reset)
-    //            .dispatch(NavigationActions.reset(
-    //              {
-    //                 index: 0,
-    //                 actions: [NavigationActions.navigate({ routeName: 'Home' })]
-    //               }));
     this.props.navigation.navigate('DeckDetail', { reload: false, title: title, questions: previous_questions });
   }
 

@@ -80,7 +80,7 @@ export default class Quiz extends Component {
             <TouchableOpacity style={styles.buttonGreen} onPress={this.checkAnswer}>
               <Text style={{color: 'white'}}>Correct</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.buttonRed}>
+            <TouchableOpacity style={styles.buttonRed} onPress={this.checkAnswer}>
               <Text style={{color: 'white'}}>Incorrect</Text>
             </TouchableOpacity>
 

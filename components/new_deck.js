@@ -23,10 +23,7 @@ export default class New_Deck extends Component {
     const { navigate } = this.props.navigation;
     Alert.alert(
       "WOW", "You created one deck!",
-      [{text: 'OK', onPress: () => navigate("Decks", { reload: true })}])
-
-
-    // this.props.navigation.goBack();
+      [{text: 'OK', onPress: () => navigate("DeckDetail", { reload: true, title: deck })}])
   }
 
   render() {
