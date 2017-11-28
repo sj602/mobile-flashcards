@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { View, Text, TextInput, AsyncStorage,
    Alert, Button, StyleSheet, TouchableOpacity,
-   KeyboardAvoidingView, Keyboard
+   KeyboardAvoidingView, Keyboard, NavigationActions
 } from 'react-native';
-import { NavigationActions } from 'react-native';
 import styles from '../style/new_question';
 import { addCardToDeck } from '../utils/api';
 

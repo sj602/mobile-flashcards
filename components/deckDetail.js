@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {
   View, Text, Button, StyleSheet, TouchableOpacity,
+  Keyboard
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import styles from '../style/deckDetail';
@@ -36,6 +37,8 @@ export default class DeckDetail extends Component {
   }
 
   componentWillMount() {
+    Keyboard.dismiss();
+
     const { title } = this.props.navigation.state.params || this.state.title;
 
     getDeck(title).then((data) => {

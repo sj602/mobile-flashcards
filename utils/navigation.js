@@ -1,5 +1,10 @@
+import React from 'react';
 import { TabNavigator, StackNavigator } from 'react-navigation';
-
+import Decks from '../components/decks';
+import New_Deck from '../components/new_deck';
+import DeckDetail from '../components/deckDetail';
+import Quiz from '../components/quiz';
+import New_Question from '../components/new_question';
 
 export const Tabs = TabNavigator({
   Decks: {
