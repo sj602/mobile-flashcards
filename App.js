@@ -6,7 +6,7 @@ import DeckDetail from './components/deckDetail';
 import Quiz from './components/quiz';
 import New_Question from './components/new_question';
 import { AppStatusBar, setLocalNotification } from './utils/helpers'
-import Stacks from '.utils/navigation';
+import Stacks from './utils/navigation';
 import styles from './style/App';
 
 export default class App extends Component {

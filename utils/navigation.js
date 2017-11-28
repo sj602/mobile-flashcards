@@ -1,7 +1,7 @@
 import { TabNavigator, StackNavigator } from 'react-navigation';
 
 
-const Tabs = TabNavigator({
+export const Tabs = TabNavigator({
   Decks: {
     screen: Decks,
     navigationOptions: {
@@ -21,7 +21,7 @@ const Tabs = TabNavigator({
 }
 );
 
-const Stacks = StackNavigator({
+export const Stacks = StackNavigator({
   Home: {
     screen: Tabs
   },
